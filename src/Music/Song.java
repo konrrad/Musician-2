@@ -16,23 +16,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class Song extends TreeNode {
-    private StringProperty text;
-    private StringProperty chords;
-    private IntegerProperty tempo;
+    private String text;
+    private String chords;
+    private Integer tempo;
     private final static Transposer transposer=new Transposer();
     private final static Metronome metronome=new Metronome();
     private final SetOfSongs set;
 
     public Song(int number,String title, SetOfSongs set) {
         super(number);
-        this.text = new SimpleStringProperty();
-        this.text.setValue(" ");
-        this.title= new SimpleStringProperty();
-        this.title.setValue(title);
-        this.chords=new SimpleStringProperty();
-        this.chords.setValue("");
-        this.tempo= new SimpleIntegerProperty();
-        this.tempo.setValue(60);
+        this.text=" ";
+        this.title=title;
+        this.chords=("");
+        this.tempo=60;
         this.set=set;
     }
 
@@ -48,7 +44,7 @@ public class Song extends TreeNode {
 
     public String toString()
     {
-        return this.number.getValue()+". "+this.title.getValue();
+        return this.number+". "+this.title;
     }
 
     public Node present()
@@ -64,7 +60,7 @@ public class Song extends TreeNode {
         //TITLE HBOX
         VBox titleHBox=new VBox();
         titleHBox.setSpacing(10);
-        TextArea titleTextArea=new TextArea(this.title.getValue());
+        TextArea titleTextArea=new TextArea(this.title);
         titleTextArea.setPrefHeight(100);
         titleTextArea.setWrapText(true);
         titleTextArea.getStyleClass().add("titleTextArea");
@@ -74,7 +70,7 @@ public class Song extends TreeNode {
         result.setTop(titleHBox);
 
         //TEMPO
-        TextArea tempoTextArea=new TextArea(this.tempo.getValue().toString());
+        TextArea tempoTextArea=new TextArea(this.tempo.toString());
         HBox tempoHBox=new HBox(tempoTextArea);
         titleHBox.getChildren().add(tempoHBox);
         tempoTextArea.setWrapText(true);
@@ -85,13 +81,13 @@ public class Song extends TreeNode {
 
         //CHORDS
         TextArea chordsTextArea=new TextArea();
-        chordsTextArea.setText(this.chords.getValue());
+        chordsTextArea.setText(this.chords);
         chordsTextArea.setWrapText(true);
 
         //TEXT VBOX
         VBox textVBox=new VBox();
         textVBox.setSpacing(20);
-        TextArea textArea=new TextArea(this.text.getValue());
+        TextArea textArea=new TextArea(this.text);
         textArea.setWrapText(true);
         textArea.setPrefHeight(500);
         textVBox.getStyleClass().add("textVBox");
@@ -113,7 +109,7 @@ public class Song extends TreeNode {
                 //TEMPO
         Button listenToTempo=new Button("Tempo");
         listenToTempo.getStyleClass().addAll("button","button-left");
-        listenToTempo.setOnAction(e->metronome.play(this.tempo.getValue()));
+        listenToTempo.setOnAction(e->metronome.play(this.tempo));
 
                 //DELETE
         Button deleteButton=new Button("Delete");
@@ -135,8 +131,8 @@ public class Song extends TreeNode {
         transUpButton.setOnAction(e-> {
             try
             {
-                this.chords.setValue(transposer.transpose(this.chords.getValue(),true));
-                chordsTextArea.setText(this.chords.getValue());
+                this.chords=transposer.transpose(this.chords,true);
+                chordsTextArea.setText(this.chords);
             }
             catch (RuntimeException ex)
             {
@@ -145,8 +141,8 @@ public class Song extends TreeNode {
         });
         transDownButton.setOnAction(e-> {
             try {
-                this.chords.setValue(transposer.transpose(this.chords.getValue(),false));
-                chordsTextArea.setText(this.chords.getValue());
+                this.chords=transposer.transpose(this.chords,false);
+                chordsTextArea.setText(this.chords);
             }
             catch (RuntimeException ex)
             {
@@ -158,17 +154,17 @@ public class Song extends TreeNode {
         Button save=new Button("Save");
         save.getStyleClass().add("button");
         save.setOnAction(e->{
-            this.text.setValue(textArea.getText());
-            this.title.setValue(titleTextArea.getText());
-            this.chords.setValue(chordsTextArea.getText());
+            this.text=textArea.getText();
+            this.title=titleTextArea.getText();
+            this.chords=chordsTextArea.getText();
             try
             {
-                this.tempo.setValue(Integer.parseInt(tempoTextArea.getText()));
+                this.tempo=Integer.parseInt(tempoTextArea.getText());
             }
             catch (NumberFormatException ex)
             {
                 this.callBadInputAlert("Bad tempo input.").display();
-                System.out.println(this.tempo.getValue().toString());
+                System.out.println(this.tempo.toString());
             }
         });
         next.getStyleClass().add("button");

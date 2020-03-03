@@ -9,13 +9,11 @@ import javafx.beans.property.StringProperty;
 import java.util.Objects;
 
 public abstract class TreeNode extends ObjectBinding {
-    protected StringProperty title;
-    protected IntegerProperty number;
+    protected String title;
+    protected Integer number;
 
     public TreeNode(int number) {
-        this.number=new SimpleIntegerProperty();
-        this.number.setValue(number);
-        this.title=new SimpleStringProperty();
+        this.number=number;
     }
 
     @Override

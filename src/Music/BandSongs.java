@@ -9,9 +9,7 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
-
 import java.util.List;
-
 import java.util.stream.Collectors;
 
 public class BandSongs {
@@ -38,8 +36,8 @@ public class BandSongs {
                 if(borderPane!=null)
                     this.borderPane.setCenter(mainScreen);
             //}
-//            root.setExpanded(false);
-//            root.setExpanded(true);
+            root.setExpanded(false);
+            root.setExpanded(true);
         }
 
     };
@@ -73,6 +71,12 @@ public class BandSongs {
         return setsOfSongs.stream().map(SetOfSongs::getSetTreeStructure).collect(Collectors.toList());
     }
 
+//    public void saveData()
+//    {
+//        DataSaver dataSaver=new DataSaver(setsOfSongs);
+//        dataSaver.save(this);
+//    }
+
     public void addSet(SetOfSongs setOfSongs)
     {
         this.setsOfSongs.add(setOfSongs);
@@ -81,7 +85,7 @@ public class BandSongs {
     public void addSong(int numberOfSet, int numberOfSong, String title)
     {
         Integer number= numberOfSet;
-        List<SetOfSongs> addTo=this.setsOfSongs.stream().filter(e->e.number.getValue().equals(number)).collect(Collectors.toList());
+        List<SetOfSongs> addTo=this.setsOfSongs.stream().filter(e->e.number.equals(number)).collect(Collectors.toList());
         addTo.forEach(e->e.addSong(new Song(numberOfSong,title,e)));
     }
 

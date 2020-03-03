@@ -33,7 +33,7 @@ public class SetOfSongs extends TreeNode {
 
     public SetOfSongs(int number) {
         super(number);
-        this.title.setValue("Set "+number);
+        this.title="Set "+number;
         this.songs.addListener(changeListener);
 
     }
@@ -45,7 +45,7 @@ public class SetOfSongs extends TreeNode {
 
     public String toString()
     {
-        return this.title.getValue();
+        return this.title;
     }
     public List<TreeItem<TreeNode>> tree()
     {
@@ -63,4 +63,9 @@ public class SetOfSongs extends TreeNode {
     {
         this.songs.remove(s);
     }
+//    public SetOfSongsJSON toJSON()
+//    {
+//
+//        List<SongJSON> songs.stream()
+//    }
 }

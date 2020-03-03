@@ -1,3 +1,7 @@
+package Music;
+
+import Boxes.AlertBox;
+import Boxes.BadInputAlertBox;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -12,12 +16,12 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class Song extends TreeNode {
-    StringProperty text;
-    StringProperty chords;
-    IntegerProperty tempo;
+    private StringProperty text;
+    private StringProperty chords;
+    private IntegerProperty tempo;
     private final static Transposer transposer=new Transposer();
     private final static Metronome metronome=new Metronome();
-    SetOfSongs set;
+    private final SetOfSongs set;
 
     public Song(int number,String title, SetOfSongs set) {
         super(number);
@@ -53,7 +57,7 @@ public class Song extends TreeNode {
         //GENERAL
         BorderPane result=new BorderPane();
 
-        result.getStylesheets().add("SongStyles.css");
+        result.getStylesheets().add("CSSFILES/SongStyles.css");
         result.getStyleClass().add("songPresentation");
 
 

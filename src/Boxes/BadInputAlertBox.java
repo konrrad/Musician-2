@@ -1,3 +1,5 @@
+package Boxes;
+
 import javafx.scene.text.Text;
 
 public class BadInputAlertBox extends AlertBox {

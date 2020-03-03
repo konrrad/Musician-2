@@ -1,3 +1,8 @@
+package Music;
+
+import Boxes.AddSetAlertBox;
+import Boxes.AddSongAlertBox;
+import Boxes.AlertBox;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -14,13 +19,14 @@ public class Main extends Application {
     }
     @Override
     public void start(Stage stage) throws Exception {
-        BandSongs bs=new BandSongs();
+        final String title="Musician 2";
+        BandSongs bandSongs=new BandSongs();
         BorderPane borderPane=new BorderPane();
-        TreeView<TreeNode> tv=bs.treeView;
-        borderPane.setLeft(tv);
+        TreeView<TreeNode> treeView=bandSongs.treeView;
+        borderPane.setLeft(treeView);
         SetOfSongs setOfSongs=new SetOfSongs(1);
-        bs.addSet(setOfSongs);
-        bs.addSong(1,1,"xax");
+        bandSongs.addSet(setOfSongs);
+        bandSongs.addSong(1,1,"xax");
 
         //menu
         MenuBar menuBar=new MenuBar();
@@ -28,13 +34,13 @@ public class Main extends Application {
         Menu addMenu=new Menu("Add");
         MenuItem addSetMenuItem=new MenuItem("Add Set");
         addSetMenuItem.setOnAction(e->{
-            AlertBox ab=new AddSetAlertBox("Add Set",bs);
+            AlertBox ab=new AddSetAlertBox("Add Set",bandSongs);
             ab.display();
         });
 
-        MenuItem addSongMenuItem=new MenuItem("Add song");
+        MenuItem addSongMenuItem=new MenuItem("Add Song");
         addSongMenuItem.setOnAction(e->{
-                    AlertBox ab=new AddSongAlertBox("Add Song", bs);
+                    AlertBox ab=new AddSongAlertBox("Add Song", bandSongs);
                     ab.display();
                 }
         );
@@ -43,18 +49,19 @@ public class Main extends Application {
         borderPane.setTop(menuBar);
         VBox mainScreen=new VBox();
         mainScreen.setAlignment(Pos.CENTER);
-        Text welcomeText= new Text("Musician 2");
+        Text welcomeText= new Text(title);
         welcomeText.getStyleClass().add("welcome-text");
         mainScreen.getChildren().add(welcomeText);
         borderPane.setCenter(mainScreen);
-        bs.setBorderPane(borderPane);
+        bandSongs.setBorderPane(borderPane);
         BorderPane.setMargin(mainScreen,new Insets(10));
         borderPane.setMinSize(1300,800);
-        borderPane.getStylesheets().add("borderPaneStyles.css");
-        Scene s=new Scene(borderPane);
+        borderPane.getStylesheets().add("CSSFILES/borderPaneStyles.css");
+        Scene scene=new Scene(borderPane);
         stage.setMinHeight(800);
         stage.setMinWidth(1300);
-        stage.setScene(s);
+        stage.setScene(scene);
+        stage.setTitle(title);
         stage.show();
     }
 }

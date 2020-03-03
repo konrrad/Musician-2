@@ -1,3 +1,5 @@
+package Music;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -12,15 +14,15 @@ import java.util.stream.Collectors;
 
 public class BandSongs {
     private final ObservableList<SetOfSongs> setsOfSongs=FXCollections.observableArrayList();
-    public final TreeItem<TreeNode> root=new TreeItem<>();
+    private final TreeItem<TreeNode> root=new TreeItem<>();
     public final TreeView<TreeNode> treeView = new TreeView<>(root);
     private BorderPane borderPane;
     private final ListChangeListener<SetOfSongs> changeListener=change -> {
         while(change.next()) {
             //TODO better way to delete sets???
 //            if (change.wasRemoved()) {
-//                List<TreeItem<TreeNode>> toRemove = change.getRemoved().stream().map(
-//                        element -> new TreeItem<TreeNode>()
+//                List<TreeItem<Music.TreeNode>> toRemove = change.getRemoved().stream().map(
+//                        element -> new TreeItem<Music.TreeNode>()
 //                ).collect(Collectors.toList());
 //                System.out.println(root.getChildren().removeAll(change.getRemoved()));
 //                //root.getChildren().removeAll(change.getRemoved());
@@ -31,7 +33,6 @@ public class BandSongs {
                 this.root.getChildren().clear();
                 this.root.getChildren().addAll(createTree());
             //}
-            System.out.println("dodano set");
             root.setExpanded(false);
             root.setExpanded(true);
         }

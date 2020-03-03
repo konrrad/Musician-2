@@ -1,3 +1,5 @@
+package Music;
+
 import java.util.*;
 
 public class Transposer {
@@ -39,12 +41,12 @@ public class Transposer {
                 }
                 if(j-i==2&&possibleChords.contains(chords.substring(i,i+1).toUpperCase()))
                 {
-                    buffer.append(this.go(chords.substring(i,j),up));
+                    buffer.append(this.goTranspose(chords.substring(i,j),up));
                     buffer.append(" ");
                 }
                 else if(j-i<2&&possibleChords.contains(chords.substring(i,j).toUpperCase()))
                 {
-                    buffer.append(this.go(chords.substring(i,j),up));
+                    buffer.append(this.goTranspose(chords.substring(i,j),up));
                     buffer.append(" ");
                 }
                 else if(j-i>2) throw new RuntimeException("Bad transpose input2");
@@ -55,7 +57,7 @@ public class Transposer {
         return buffer.toString();
     }
 
-    private String go(String chord,boolean up)
+    private String goTranspose(String chord, boolean up)
     {
         int multiplier= up? 1:-1;
         char[] characters=new char[2];

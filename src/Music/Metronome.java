@@ -1,3 +1,5 @@
+package Music;
+
 import javax.swing.*;
 import java.applet.Applet;
 import java.applet.AudioClip;
@@ -13,7 +15,7 @@ public class Metronome implements ActionListener {
     private final Timer timer;
     private int beats=0;
     private static final int maxBeats=8;
-    URL clickUrl=null;
+    private URL clickUrl=null;
 
     public Metronome()
     {

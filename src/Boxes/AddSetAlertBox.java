@@ -1,3 +1,6 @@
+package Boxes;
+import Music.BandSongs;
+import Music.SetOfSongs;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -8,7 +11,8 @@ public class AddSetAlertBox extends AlertBox {
     private final Label numberLabel=new Label("Number");
     protected final Button saveButton=new Button("Save");
     protected final BandSongs bandSongs;
-    public AddSetAlertBox(String title,BandSongs bandSongs) {
+
+    public AddSetAlertBox(String title, BandSongs bandSongs) {
         super(title);
         this.bandSongs=bandSongs;
         this.layout.getChildren().addAll(numberLabel,numberField,saveButton);

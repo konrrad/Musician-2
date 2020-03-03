@@ -1,3 +1,5 @@
+package Music;
+
 import javafx.beans.binding.ObjectBinding;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -7,8 +9,8 @@ import javafx.beans.property.StringProperty;
 import java.util.Objects;
 
 public abstract class TreeNode extends ObjectBinding {
-    StringProperty title;
-    IntegerProperty number;
+    protected StringProperty title;
+    protected IntegerProperty number;
 
     public TreeNode(int number) {
         this.number=new SimpleIntegerProperty();

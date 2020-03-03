@@ -1,17 +1,17 @@
+package Music;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SetOfSongs extends TreeNode {
-    public ObservableList<Song> songs= FXCollections.observableArrayList();
-    public TreeItem<TreeNode>  setTreeStructure=new TreeItem<>(this);
-    ListChangeListener<Song> changeListener= change -> {
-        System.out.println("Dodano piosenke");
+    private ObservableList<Song> songs= FXCollections.observableArrayList();
+    private TreeItem<TreeNode>  setTreeStructure=new TreeItem<>(this);
+    private ListChangeListener<Song> changeListener= change -> {
         while (change.next())
         {
             if(change.wasRemoved())
@@ -30,13 +30,6 @@ public class SetOfSongs extends TreeNode {
         setTreeStructure.getChildren().clear();
         setTreeStructure.getChildren().addAll(tree());
     };
-
-    public SetOfSongs(int number, ArrayList<Song> songs) {
-        super(number);
-        this.songs = FXCollections.observableArrayList(songs);
-        this.title.setValue("Set "+number);
-        this.songs.addListener(changeListener);
-    }
 
     public SetOfSongs(int number) {
         super(number);

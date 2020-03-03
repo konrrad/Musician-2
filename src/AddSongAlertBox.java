@@ -28,6 +28,11 @@ public class AddSongAlertBox extends  AlertBox {
         });
     }
 
+    private boolean isDataValid()
+    {
+        return true;
+    }
+
     private void saveSong(ActionEvent e) {
         if(isDataValid())
         {

@@ -20,6 +20,12 @@ public class AddSetAlertBox extends AlertBox {
         });
     }
 
+    private boolean isDataValid()
+    {
+        return true;
+    }
+
+
     private void saveSet(ActionEvent actionEvent) {
         if(isDataValid())
         {

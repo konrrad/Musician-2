@@ -16,4 +16,12 @@
 .button
 {
     -fx-background-color: 	#20B2AA;
+    -fx-padding: 10px;
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+}
+
+.titleTextArea *.text
+{
+    -fx-text-alignment: center;
 }

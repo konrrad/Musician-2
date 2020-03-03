@@ -17,17 +17,19 @@ public class Song extends TreeNode {
     IntegerProperty tempo;
     private final static Transposer transposer=new Transposer();
     private final static Metronome metronome=new Metronome();
+    SetOfSongs set;
 
-    public Song(int number,String title, String text) {
+    public Song(int number,String title, SetOfSongs set) {
         super(number);
         this.text = new SimpleStringProperty();
-        this.text.setValue(text);
+        this.text.setValue(" ");
         this.title= new SimpleStringProperty();
         this.title.setValue(title);
         this.chords=new SimpleStringProperty();
         this.chords.setValue("");
         this.tempo= new SimpleIntegerProperty();
-        this.tempo.setValue(0);
+        this.tempo.setValue(60);
+        this.set=set;
     }
 
     @Override
@@ -51,12 +53,13 @@ public class Song extends TreeNode {
         //GENERAL
         BorderPane result=new BorderPane();
 
-        result.getStylesheets().add("Style.css");
+        result.getStylesheets().add("SongStyles.css");
         result.getStyleClass().add("songPresentation");
 
 
         //TITLE HBOX
         VBox titleHBox=new VBox();
+        titleHBox.setSpacing(10);
         TextArea titleTextArea=new TextArea(this.title.getValue());
         titleTextArea.setPrefHeight(100);
         titleTextArea.setWrapText(true);
@@ -77,14 +80,13 @@ public class Song extends TreeNode {
 
 
         //CHORDS
-        VBox chordsVBox=new VBox();
         TextArea chordsTextArea=new TextArea();
         chordsTextArea.setText(this.chords.getValue());
         chordsTextArea.setWrapText(true);
-        chordsVBox.getChildren().add(chordsTextArea);
 
         //TEXT VBOX
         VBox textVBox=new VBox();
+        textVBox.setSpacing(20);
         TextArea textArea=new TextArea(this.text.getValue());
         textArea.setWrapText(true);
         textArea.setPrefHeight(500);
@@ -100,12 +102,25 @@ public class Song extends TreeNode {
             //LEFT
         VBox left=new VBox();
         left.setSpacing(100);
+                //PREV
         Button prev=new Button("Back");
         prev.getStyleClass().addAll("button","button-left");
+
+                //TEMPO
         Button listenToTempo=new Button("Tempo");
         listenToTempo.getStyleClass().addAll("button","button-left");
         listenToTempo.setOnAction(e->metronome.play(this.tempo.getValue()));
-        left.getChildren().addAll(prev,listenToTempo);
+
+                //DELETE
+        Button deleteButton=new Button("Delete");
+        deleteButton.getStyleClass().addAll("button","button-left","delete-button");
+        deleteButton.setAlignment(Pos.BOTTOM_LEFT);
+        deleteButton.setOnAction(e->{
+            this.set.deleteSong(this);
+            result.setVisible(false);
+        });
+
+        left.getChildren().addAll(prev,listenToTempo,deleteButton);
         left.setAlignment(Pos.TOP_RIGHT);
         result.setLeft(left);
             //RIGHT

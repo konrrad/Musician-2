@@ -1,16 +1,14 @@
 import javafx.application.Application;
-import javafx.collections.ListChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
-
-import javax.swing.*;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -38,10 +36,11 @@ public class Main extends Application {
 //        b1.setExpanded(false); b1.setExpanded(true);});
         //vb.getChildren().addAll(tv);
 
-        Song song=new Song(1,"xax","text");
+
         SetOfSongs setOfSongs=new SetOfSongs(1);
+        //Song song=new Song(1,"xax",setOfSongs);
         bs.addSet(setOfSongs);
-        bs.addSong(1,song);
+        bs.addSong(1,1,"xax");
 
         //menu
         MenuBar menuBar=new MenuBar();
@@ -66,15 +65,23 @@ public class Main extends Application {
         //vb.setPrefHeight(800);
         VBox mainScreen=new VBox();
         mainScreen.setAlignment(Pos.CENTER);
-        Text welcome=new Text("Musician 2");
-        welcome.setTextAlignment(TextAlignment.CENTER);
-        mainScreen.getChildren().addAll(welcome);
+//        Label welcome=new Label("Musician 2");
+//        welcome.getStyleClass().add("welcome-text");
+//        welcome.setStyle("-fx-font-size: 60px; -fx-color: red;");
+//        welcome.setTextAlignment(TextAlignment.CENTER);
+//        mainScreen.getChildren().addAll(welcome);
+//        mainScreen.getStylesheets().add("mainScreenStyles.css");
+        Text welcomeText= new Text("Musician 2");
+        welcomeText.getStyleClass().add("welcome-text");
+        //welcomeText.setStyle("-fx-fill: #20B2AA; -fx-font-size: 150px; ");
+        //welcomeText.setFill(Color.AQUA);
+        mainScreen.getChildren().add(welcomeText);
         borderPane.setCenter(mainScreen);
         bs.setBorderPane(borderPane);
         BorderPane.setMargin(mainScreen,new Insets(10));
         borderPane.setMinSize(1300,800);
+        borderPane.getStylesheets().add("borderPaneStyles.css");
         Scene s=new Scene(borderPane);
-        //s.getStylesheets().add("Style.css");
         stage.setMinHeight(800);
         stage.setMinWidth(1300);
         stage.setScene(s);

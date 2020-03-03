@@ -30,3 +30,8 @@
 {
     -fx-font-size:15px;
 }
+
+.delete-button
+{
+    -fx-background-color: red;
+}

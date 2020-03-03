@@ -45,7 +45,7 @@ public class Metronome implements ActionListener {
         }
         else
         {
-            audioClip.loop();
+            audioClip.play();
             beats++;
 
         }

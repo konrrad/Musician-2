@@ -1,13 +1,8 @@
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
-import javafx.scene.control.TreeView;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -70,5 +65,9 @@ public class SetOfSongs extends TreeNode {
     public void addSong(Song s)
     {
         this.songs.add(s);
+    }
+    public void deleteSong(Song s)
+    {
+        this.songs.remove(s);
     }
 }

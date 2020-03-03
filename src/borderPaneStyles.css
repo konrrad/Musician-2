@@ -1,0 +1,21 @@
+.root
+{
+    -fx-background-image: url("../../../background1.png");
+    -fx-background-repeat: repeat-x;
+    -fx-background-position: right center;
+
+}
+
+.text
+{
+    -fx-font-size: 18px;
+}
+
+.welcome-text
+{
+    -fx-fill: #20B2AA;
+    -fx-font-size: 150px;
+
+}
+
+

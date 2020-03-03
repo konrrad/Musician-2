@@ -3,11 +3,13 @@ package Music;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.layout.BorderPane;
+
 import java.util.List;
 
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ public class BandSongs {
     private final TreeItem<TreeNode> root=new TreeItem<>();
     public final TreeView<TreeNode> treeView = new TreeView<>(root);
     private BorderPane borderPane;
+    private Node mainScreen;
     private final ListChangeListener<SetOfSongs> changeListener=change -> {
         while(change.next()) {
             //TODO better way to delete sets???
@@ -32,9 +35,11 @@ public class BandSongs {
             //else {
                 this.root.getChildren().clear();
                 this.root.getChildren().addAll(createTree());
+                if(borderPane!=null)
+                    this.borderPane.setCenter(mainScreen);
             //}
-            root.setExpanded(false);
-            root.setExpanded(true);
+//            root.setExpanded(false);
+//            root.setExpanded(true);
         }
 
     };
@@ -60,6 +65,7 @@ public class BandSongs {
     public void setBorderPane(BorderPane screen)
     {
         this.borderPane=screen;
+        this.mainScreen=screen.getCenter();
     }
 
     private List<TreeItem<TreeNode>> createTree()

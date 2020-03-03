@@ -1,4 +1,3 @@
-import com.sun.source.tree.Tree;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public class BandSongs {
     private final ObservableList<SetOfSongs> setsOfSongs=FXCollections.observableArrayList();
     public final TreeItem<TreeNode> root=new TreeItem<>();
-    TreeView<TreeNode> treeView = new TreeView<>(root);
+    public final TreeView<TreeNode> treeView = new TreeView<>(root);
     private BorderPane borderPane;
     private final ListChangeListener<SetOfSongs> changeListener=change -> {
         while(change.next()) {
@@ -43,7 +42,6 @@ public class BandSongs {
 
     public BandSongs() {
         setsOfSongs.addListener(changeListener);
-        //createMock();
         root.setExpanded(true);
         root.getChildren().addAll(createTree());
         treeView.getSelectionModel().selectedItemProperty().addListener((observableValue, treeNodeTreeItem, t1) -> {
@@ -67,23 +65,19 @@ public class BandSongs {
     {
         return setsOfSongs.stream().map(SetOfSongs::getSetTreeStructure).collect(Collectors.toList());
     }
-//    private void createMock()
-//    {
-//        Song song=new Song(1,"xax",);
-//        SetOfSongs setOfSongs=new SetOfSongs(1);
-//        setOfSongs.addSong(song);
-//        this.addSet(setOfSongs);
-//    }
+
     public void addSet(SetOfSongs setOfSongs)
     {
         this.setsOfSongs.add(setOfSongs);
     }
+
     public void addSong(int numberOfSet, int numberOfSong, String title)
     {
         Integer number= numberOfSet;
         List<SetOfSongs> addTo=this.setsOfSongs.stream().filter(e->e.number.getValue().equals(number)).collect(Collectors.toList());
         addTo.forEach(e->e.addSong(new Song(numberOfSong,title,e)));
     }
+
     private void deleteSet(SetOfSongs set)
     {
         this.setsOfSongs.remove(set);

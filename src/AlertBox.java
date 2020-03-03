@@ -6,8 +6,8 @@ import javafx.stage.Stage;
 
 
 public class AlertBox {
-    protected Stage window=new Stage();
-    protected VBox layout=new VBox();
+    protected final Stage window=new Stage();
+    protected final VBox layout=new VBox();
     Scene scene =new Scene(layout);
     public AlertBox(String title) {
         window.initModality(Modality.APPLICATION_MODAL);

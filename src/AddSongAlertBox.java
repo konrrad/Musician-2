@@ -5,14 +5,14 @@ import javafx.scene.control.TextField;
 
 public class AddSongAlertBox extends  AlertBox {
 
-    private TextField titleField=new TextField();
-    private TextField numberField=new TextField();
-    private TextField setField=new TextField();
-    private Label titleLabel=new Label("Title: ");
-    private Label numberLabel=new Label("Number: ");
-    private Label setLabel=new Label("Set number: ");
-    protected Button saveButton=new Button("Save");
-    protected BandSongs bandSongs;
+    private final TextField titleField=new TextField();
+    private final TextField numberField=new TextField();
+    private final TextField setField=new TextField();
+    private final Label titleLabel=new Label("Title: ");
+    private final Label numberLabel=new Label("Number: ");
+    private final Label setLabel=new Label("Set number: ");
+    protected final Button saveButton=new Button("Save");
+    protected final BandSongs bandSongs;
 
 
     public AddSongAlertBox(String title,BandSongs bandSongs) {

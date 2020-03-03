@@ -4,12 +4,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class AddSetAlertBox extends AlertBox {
-    //private TextField titleField=new TextField();
-    private TextField numberField=new TextField();
-    //private Label titleLabel=new Label("Title");
-    private Label numberLabel=new Label("Number");
-    protected Button saveButton=new Button("Save");
-    protected BandSongs bandSongs;
+    private final TextField numberField=new TextField();
+    private final Label numberLabel=new Label("Number");
+    protected final Button saveButton=new Button("Save");
+    protected final BandSongs bandSongs;
     public AddSetAlertBox(String title,BandSongs bandSongs) {
         super(title);
         this.bandSongs=bandSongs;

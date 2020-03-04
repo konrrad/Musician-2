@@ -21,7 +21,7 @@ public class Song extends TreeNode {
 
     public Song(int number,String title, SetOfSongs set) {
         super(number);
-        this.text=" ";
+        this.text=("");
         this.title=title;
         this.chords=("");
         this.tempo=60;
@@ -71,6 +71,7 @@ public class Song extends TreeNode {
         VBox titleHBox=new VBox();
         titleHBox.setSpacing(10);
         TextArea titleTextArea=new TextArea(this.title);
+        titleTextArea.setPromptText("TITLE");
         titleTextArea.setPrefHeight(100);
         titleTextArea.setWrapText(true);
         titleTextArea.getStyleClass().add("titleTextArea");
@@ -81,6 +82,7 @@ public class Song extends TreeNode {
 
         //TEMPO
         TextArea tempoTextArea=new TextArea(this.tempo.toString());
+        tempoTextArea.setPromptText("TEMPO");
         HBox tempoHBox=new HBox(tempoTextArea);
         titleHBox.getChildren().add(tempoHBox);
         tempoTextArea.setWrapText(true);
@@ -91,6 +93,7 @@ public class Song extends TreeNode {
 
         //CHORDS
         TextArea chordsTextArea=new TextArea();
+        chordsTextArea.setPromptText("CHORDS");
         chordsTextArea.setText(this.chords);
         chordsTextArea.setWrapText(true);
 
@@ -98,6 +101,7 @@ public class Song extends TreeNode {
         VBox textVBox=new VBox();
         textVBox.setSpacing(20);
         TextArea textArea=new TextArea(this.text);
+        textArea.setPromptText("TEXT");
         textArea.setWrapText(true);
         textArea.setPrefHeight(500);
         textVBox.getStyleClass().add("textVBox");
@@ -174,7 +178,6 @@ public class Song extends TreeNode {
             catch (NumberFormatException ex)
             {
                 this.callBadInputAlert("Bad tempo input.").display();
-                System.out.println(this.tempo.toString());
             }
         });
         next.getStyleClass().add("button");

@@ -31,13 +31,16 @@ public class BandSongs {
 //                System.out.println("usunieto set");
 //            }
             //else {
+            if(change.wasAdded()||change.wasRemoved())
+            {
                 this.root.getChildren().clear();
                 this.root.getChildren().addAll(createTree());
                 if(borderPane!=null)
                     this.borderPane.setCenter(mainScreen);
+
+            }
+
             //}
-            root.setExpanded(false);
-            root.setExpanded(true);
         }
 
     };
@@ -50,7 +53,7 @@ public class BandSongs {
         root.setExpanded(true);
         root.getChildren().addAll(createTree());
         treeView.getSelectionModel().selectedItemProperty().addListener((observableValue, treeNodeTreeItem, t1) -> {
-            if(t1.getValue() instanceof Song) borderPane.setCenter(((Song) t1.getValue()).present());
+            if(t1!=null&&t1.getValue() instanceof Song) borderPane.setCenter(((Song) t1.getValue()).present());
         });
         MenuItem deleteSetMenuItem=new MenuItem("Delete Set");
         deleteSetMenuItem.setOnAction(e->{
@@ -77,7 +80,6 @@ public class BandSongs {
         List<SetOfSongsJSON> sets=this.setsOfSongs.stream().map(SetOfSongs::toJSON).collect(Collectors.toList());
         DataSaver dataSaver=new DataSaver();
         dataSaver.save(sets);
-
     }
 
     public void loadData()
@@ -93,8 +95,7 @@ public class BandSongs {
 
     public void addSong(int numberOfSet, int numberOfSong, String title)
     {
-        Integer number= numberOfSet;
-        List<SetOfSongs> addTo=this.setsOfSongs.stream().filter(e->e.number.equals(number)).collect(Collectors.toList());
+        List<SetOfSongs> addTo=this.setsOfSongs.stream().filter(e->e.number==numberOfSet).collect(Collectors.toList());
         addTo.forEach(e->e.addSong(new Song(numberOfSong,title,e)));
     }
 

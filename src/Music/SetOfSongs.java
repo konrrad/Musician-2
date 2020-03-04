@@ -1,4 +1,6 @@
 package Music;
+import javafx.beans.InvalidationListener;
+import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
@@ -7,8 +9,9 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SetOfSongs extends TreeNode {
-    private ObservableList<Song> songs;
+    private ObservableList<Song> songs= FXCollections.observableArrayList();
     private TreeItem<TreeNode>  setTreeStructure;
+    private boolean hasListener=false;
     private ListChangeListener<Song> changeListener= change -> {
         while (change.next())
         {
@@ -34,15 +37,13 @@ public class SetOfSongs extends TreeNode {
     {
         super(number);
         this.title="Set "+number;
-
     }
 
     public void setSongs(ObservableList<Song> songs)
     {
         this.songs=songs;
-        this.songs.addListener(changeListener);
-
-
+        this.songs.addListener(this.changeListener);
+        hasListener=true;
     }
 
     @Override
@@ -61,10 +62,15 @@ public class SetOfSongs extends TreeNode {
 
     public TreeItem<TreeNode> getSetTreeStructure() {
         setTreeStructure=new TreeItem<>(this);
+        setTreeStructure.getChildren().addAll(this.tree());
         return setTreeStructure;
     }
     public void addSong(Song s)
     {
+        if(!this.hasListener)
+        {
+            this.songs.addListener(this.changeListener);
+        }
         this.songs.add(s);
     }
     public void deleteSong(Song s)

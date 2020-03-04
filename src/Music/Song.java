@@ -2,10 +2,6 @@ package Music;
 
 import Boxes.AlertBox;
 import Boxes.BadInputAlertBox;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -21,7 +17,7 @@ public class Song extends TreeNode {
     private Integer tempo;
     private final static Transposer transposer=new Transposer();
     private final static Metronome metronome=new Metronome();
-    private final SetOfSongs set;
+    private SetOfSongs set;
 
     public Song(int number,String title, SetOfSongs set) {
         super(number);
@@ -29,6 +25,20 @@ public class Song extends TreeNode {
         this.title=title;
         this.chords=("");
         this.tempo=60;
+        this.set=set;
+    }
+
+    public Song(int number,String title,int tempo,String text,String chords)
+    {
+        super(number);
+        this.text=text;
+        this.title=title;
+        this.chords=chords;
+        this.tempo=tempo;
+
+    }
+
+    public void setSet(SetOfSongs set) {
         this.set=set;
     }
 
@@ -175,5 +185,9 @@ public class Song extends TreeNode {
         BorderPane.setMargin(right, new Insets(10));
         BorderPane.setMargin(left, new Insets(10));
         return result;
+    }
+    public SongJSON toJSON()
+    {
+        return new SongJSON(this.title,this.number,this.text,this.chords,this.tempo);
     }
 }

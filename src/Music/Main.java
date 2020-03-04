@@ -24,13 +24,15 @@ public class Main extends Application {
         BorderPane borderPane=new BorderPane();
         TreeView<TreeNode> treeView=bandSongs.treeView;
         borderPane.setLeft(treeView);
-        SetOfSongs setOfSongs=new SetOfSongs(1);
-        bandSongs.addSet(setOfSongs);
-        bandSongs.addSong(1,1,"xax");
 
         //menu
         MenuBar menuBar=new MenuBar();
         Menu fileMenu=new Menu("File");
+        MenuItem saveItem=new MenuItem("Save Work");
+        MenuItem loadItem=new MenuItem("Load data");
+        fileMenu.getItems().addAll(saveItem,loadItem);
+        loadItem.setOnAction(e->bandSongs.loadData());
+        saveItem.setOnAction(e->bandSongs.saveData());
         Menu addMenu=new Menu("Add");
         MenuItem addSetMenuItem=new MenuItem("Add Set");
         addSetMenuItem.setOnAction(e->{

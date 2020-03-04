@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class BandSongs {
-    private final ObservableList<SetOfSongs> setsOfSongs=FXCollections.observableArrayList();
+    private ObservableList<SetOfSongs> setsOfSongs=FXCollections.observableArrayList();
     private final TreeItem<TreeNode> root=new TreeItem<>();
     public final TreeView<TreeNode> treeView = new TreeView<>(root);
     private BorderPane borderPane;
@@ -45,6 +45,7 @@ public class BandSongs {
 
 
     public BandSongs() {
+        this.loadData();
         setsOfSongs.addListener(changeListener);
         root.setExpanded(true);
         root.getChildren().addAll(createTree());
@@ -71,11 +72,19 @@ public class BandSongs {
         return setsOfSongs.stream().map(SetOfSongs::getSetTreeStructure).collect(Collectors.toList());
     }
 
-//    public void saveData()
-//    {
-//        DataSaver dataSaver=new DataSaver(setsOfSongs);
-//        dataSaver.save(this);
-//    }
+    public void saveData()
+    {
+        List<SetOfSongsJSON> sets=this.setsOfSongs.stream().map(SetOfSongs::toJSON).collect(Collectors.toList());
+        DataSaver dataSaver=new DataSaver();
+        dataSaver.save(sets);
+
+    }
+
+    public void loadData()
+    {
+        DataSaver dataSaver=new DataSaver();
+        this.setsOfSongs=dataSaver.load();
+    }
 
     public void addSet(SetOfSongs setOfSongs)
     {

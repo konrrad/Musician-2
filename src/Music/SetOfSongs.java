@@ -1,6 +1,4 @@
 package Music;
-
-import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TreeItem;
@@ -9,8 +7,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class SetOfSongs extends TreeNode {
-    private ObservableList<Song> songs= FXCollections.observableArrayList();
-    private TreeItem<TreeNode>  setTreeStructure=new TreeItem<>(this);
+    private ObservableList<Song> songs;
+    private TreeItem<TreeNode>  setTreeStructure;
     private ListChangeListener<Song> changeListener= change -> {
         while (change.next())
         {
@@ -31,10 +29,19 @@ public class SetOfSongs extends TreeNode {
         setTreeStructure.getChildren().addAll(tree());
     };
 
-    public SetOfSongs(int number) {
+
+    public SetOfSongs(int number)
+    {
         super(number);
         this.title="Set "+number;
+
+    }
+
+    public void setSongs(ObservableList<Song> songs)
+    {
+        this.songs=songs;
         this.songs.addListener(changeListener);
+
 
     }
 
@@ -53,6 +60,7 @@ public class SetOfSongs extends TreeNode {
     }
 
     public TreeItem<TreeNode> getSetTreeStructure() {
+        setTreeStructure=new TreeItem<>(this);
         return setTreeStructure;
     }
     public void addSong(Song s)
@@ -63,9 +71,9 @@ public class SetOfSongs extends TreeNode {
     {
         this.songs.remove(s);
     }
-//    public SetOfSongsJSON toJSON()
-//    {
-//
-//        List<SongJSON> songs.stream()
-//    }
+    public SetOfSongsJSON toJSON()
+    {
+        List<SongJSON> mapped=songs.stream().map(Song::toJSON).collect(Collectors.toList());
+        return new SetOfSongsJSON(this.title, this.number,mapped);
+    }
 }

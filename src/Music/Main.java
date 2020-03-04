@@ -29,9 +29,7 @@ public class Main extends Application {
         MenuBar menuBar=new MenuBar();
         Menu fileMenu=new Menu("File");
         MenuItem saveItem=new MenuItem("Save Work");
-        MenuItem loadItem=new MenuItem("Load data");
-        fileMenu.getItems().addAll(saveItem,loadItem);
-        loadItem.setOnAction(e->bandSongs.loadData());
+        fileMenu.getItems().addAll(saveItem);
         saveItem.setOnAction(e->bandSongs.saveData());
         Menu addMenu=new Menu("Add");
         MenuItem addSetMenuItem=new MenuItem("Add Set");
